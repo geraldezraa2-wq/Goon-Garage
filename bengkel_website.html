@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Bengkel</title>
+  <style>
+    :root{--orange:#ff7a00;--dark:#222;--muted:#666}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, Arial, sans-serif;margin:0;color:#111;background:#fafafa}
+    
+    /* MODIFIKASI HEADER UNTUK LOGO */
+    header{
+        background:var(--orange);
+        color:#fff;
+        padding:18px 16px;
+        /* Menggunakan Flexbox untuk perataan horizontal */
+        display: flex; 
+        align-items: center; /* Perataan vertikal ke tengah */
+        gap: 12px; /* Jarak antara logo dan teks */
+    }
+    
+    /* Styling untuk Logo */
+    .logo {
+        height: 100px; /* Sesuaikan tinggi logo Anda */
+        width: auto;
+    }
+    
+    /* Container untuk Judul dan Subjudul */
+    .header-text {
+        flex-grow: 1; /* Agar blok teks mengambil sisa ruang */
+        text-align: left; /* Teks dalam blok ini rata kiri */
+    }
+    
+    /* Atur ulang margin h1 */
+    header h1 {
+        margin: 0; 
+    }
+    
+    /* ATUR ULANG MARGIN H1 DAN H2 BAWAAN AGAR TIDAK KONFLIK */
+    h1,h2{margin:0 0 12px}
+
+    nav{display:flex;gap:12px;justify-content:center;padding:12px;background:#fff;border-bottom:1px solid #eee}
+    nav a{color:var(--dark);text-decoration:none;padding:8px 12px;border-radius:8px}
+    nav a.active{background:#ffedd9}
+    .container{max-width:980px;margin:22px auto;padding:0 16px}
+    
+
+    /* layout */
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    .card{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(20,20,20,0.04)}
+
+    /* forms */
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input,select,textarea{width:100%;padding:10px;margin-bottom:10px;border:1px solid #e6e6e6;border-radius:8px}
+    button{background:var(--orange);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .muted{color:var(--muted);font-size:13px}
+    .msg-error{color:red;font-size:13px}
+    .msg-success{color:green;font-size:13px}
+
+    /* member list */
+    .member-row{display:flex;justify-content:space-between;padding:8px 6px;border-bottom:1px dashed #f0f0f0}
+    .member-row:last-child{border-bottom:none}
+    .actions button{margin-left:6px;padding:6px 8px}
+
+    /* small */
+    .small{font-size:13px}
+    footer{margin:40px 0 80px;text-align:center;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  
+  <header>
+    <img src="GOONGARAGE.png" alt="Logo Bengkel" class="logo">
+    <div class="header-text">
+      <h1>Goon Garage</h1>
+      <div class="muted">Dibuat untuk tugas Akhir TIK</div>
+    </div>
+  </header>
+  <nav id="mainNav">
+    <a href="#home" data-route>Beranda</a>
+    <a href="#layanan" data-route>Layanan</a>
+    <a href="#members" data-route>Members</a>
+    <a href="#dashboard" data-route>Dashboard</a>
+    <a href="#about" data-route>Tentang</a>
+    <a href="#contact" data-route>Kontak</a>
+    <a href="#login" data-route id="navLogin">Login Admin</a>
+  </nav>
+
+  <div class="container">
+    <section id="home" class="view">
+      <div class="card">
+        <h2>Selamat Datang</h2>
+        <p>Kami GOON GARAGE siap melayana setiap masalah permobilan dengan 4 karyawan yang sangat beraura setiap hari senin-sabtu karena minggu untuk gooning</p>
+      </div>
+      <div style="height:18px"></div>
+      <div class="grid">
+        <div>
+          <div class="card">
+            <h3>Layanan Unggulan</h3>
+            <ul>
+              <li>Servis mesin</li>
+              <li>Tuning</li>
+              <li>Ganti oli</li>
+              <li>Sparepart Original ril no fake</li>
+            </ul>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="card">
+            <h3>Info Cepat</h3>
+            <p class="muted">Jam buka: Senin - Sabtu, 08:00 - 17:00</p>
+            <p class="muted">Alamat: Jl. WSPEED No.6767, Kota Uniga</p>
+            <p class="muted">Nomor telepon : 0856789121</p>
+          </div>
+        </div>
+ 
+        <aside>
+          <div class="card">
+            <h4>Promo</h4>
+            <p class="small">Pada Saat ini tidak ada promo untuk mu :[</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="layanan" class="view" style="display:none">
+      <div class="card">
+        <h2>Daftar Layanan</h2>
+        <p>Kami melayani berbagai perbaikan dan perawatan kendaraan.</p>
+        <ul>
+          <li>Diagnosa Mesin</li>
+          <li>Servis umum</li>
+          <li>Tuning</li>
+          <li>Ganti oli</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="members" class="view" style="display:none">
+      <div class="grid">
+        <div>
+          <div class="card">
+            <h2>Member Area</h2>
+            <p class="muted">Daftar diri sebagai member untuk dapat menikmati promo.</p>
+
+            <label>Nama</label>
+            <input id="m_nama" placeholder="Nama lengkap" />
+            <label>No HP</label>
+            <input id="m_phone" placeholder="08xxxx" />
+            <label>Plat (opsional)</label>
+            <input id="m_plate" placeholder="B 1234 XYZ" />
+            <button onclick="addMemberFromPublic()">Daftar sebagai Member</button>
+            <p id="publicMsg" class="small muted"></p>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="card">
+            <h3>Manfaat Member</h3>
+            <ul>
+              <li>Diskon servis</li>
+              <li>Antrean prioritas</li>
+              <li>Riwayat servis tersimpan</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h4>Daftar Member Singkat</h4>
+            <div id="publicList"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="dashboard" class="view" style="display:none">
+      <div class="card">
+        <h2>Admin Dashboard</h2>
+        <div class="muted small">Ringkasan cepat data member</div>
+        <div style="height:12px"></div>
+        <div class="grid">
+          <div>
+            <div class="card">
+              <h3>Total Member</h3>
+              <div id="statTotal" style="font-size:28px;font-weight:600">0</div>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div class="card">
+              <h3>Tambah Member (Admin)</h3>
+              <label>Nama</label>
+              <input id="a_nama" />
+              <label>HP</label>
+              <input id="a_phone" />
+              <label>Plat</label>
+              <input id="a_plate" />
+              <button onclick="adminAddMember()">Tambah Member</button>
+              <p id="adminMemberMsg" class="small muted"></p>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card">
+              <h3>Daftar Member</h3>
+              <label>Cari</label>
+              <input id="searchMember" placeholder="Cari nama atau hp" oninput="renderMemberList()" />
+              <div id="memberList" style="margin-top:10px;max-height:360px;overflow:auto"></div>
+              <div style="height:8px"></div>
+              <button onclick="exportCSV()">Export CSV</button>
+              <button onclick="clearAllMembers()" style="background:#c33;margin-left:8px">Hapus Semua</button>
+              <div style="height:8px"></div>
+              <button onclick="logout()" style="background:#444">Logout</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="view" style="display:none">
+      <div class="card">
+        <h2>Tentang Bengkel</h2>
+        <p>Clash Royale</p>
+      </div>
+    </section>
+
+    <section id="contact" class="view" style="display:none">
+      <div class="card">
+        <h2>Kontak</h2>
+        <p class="muted">Hubungi kami untuk info dan booking.</p>
+        <label>Nama</label>
+        <input id="c_name" />
+        <label>Pesan</label>
+        <textarea id="c_message"></textarea>
+        <button onclick="sendContact()">Kirim</button>
+        <p id="contactMsg" class="small muted"></p>
+      </div>
+    </section>
+
+    <section id="login" class="view" style="display:none">
+      <div class="card" style="max-width:420px;margin:auto">
+        <h2>Login Admin</h2>
+        <label>Username</label>
+        <input id="login_user" value="admin" />
+        <label>Password</label>
+        <input id="login_pass" type="password" value="password123" />
+        <button onclick="doLogin()">Login</button>
+        <p id="loginMsg" class="small muted"></p> <p class="small muted">Default: admin / password123 (ubah segera)</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    kopiright 2025 <strong>GOONGARAGE</strong> TM
+  </footer>
+
+  <script>
+    /* ---------------------- Simple Router ---------------------- */
+    const views = document.querySelectorAll('.view');
+    function showRoute(route){
+      views.forEach(v=>v.style.display='none');
+      const el = document.getElementById(route) || document.getElementById('home');
+      el.style.display='block';
+      // active nav
+      document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+      const navlink = document.querySelector(`nav a[href="#${route}"]`);
+      if(navlink) navlink.classList.add('active');
+    }
+    function handleHash(){
+      const hash = location.hash.replace('#','')||'home';
+      // protect admin routes
+      const adminRoutes = ['dashboard'];
+      if(adminRoutes.includes(hash) && !isLoggedIn()){
+        location.hash = 'login'; return;
+      }
+      showRoute(hash);
+      // update nav text
+      document.getElementById('navLogin').textContent = isLoggedIn()? 'Admin (Online)' : 'Login Admin';
+      if(hash==='dashboard') {
+        refreshStats();
+        renderMemberList(); // Pastikan list member dimuat saat masuk dashboard
+      }
+      if(hash==='members' || hash==='home') renderPublicList();
+    }
+    window.addEventListener('hashchange', handleHash);
+    handleHash();
+
+    /* ---------------------- Auth ---------------------- */
+    // admin stored in localStorage under key 'bengkel_admins'
+    const DEFAULT_ADMIN = {username:'admin', password:'password123'};
+    function getAdmins(){
+      try{ return JSON.parse(localStorage.getItem('bengkel_admins'))||[DEFAULT_ADMIN]; }catch(e){return [DEFAULT_ADMIN]}
+    }
+    function isLoggedIn(){ return !!localStorage.getItem('bengkel_logged'); }
+    
+    function doLogin(){
+      const user = document.getElementById('login_user').value;
+      const pass = document.getElementById('login_pass').value;
+      const loginMsg = document.getElementById('loginMsg');
+      loginMsg.textContent = ''; // Clear previous message
+      
+      const admins = getAdmins();
+      const found = admins.find(a=>a.username===user && a.password===pass);
+      
+      if(found){ 
+        localStorage.setItem('bengkel_logged', user); 
+        loginMsg.textContent = 'Login berhasil. Mengalihkan ke dashboard...';
+        loginMsg.className = 'msg-success small';
+        // Hapus alert bawaan untuk pengalaman yang lebih mulus
+        setTimeout(() => {
+            location.hash='dashboard'; 
+        }, 500); 
+      } else {
+        loginMsg.textContent = 'Username / password salah!';
+        loginMsg.className = 'msg-error small';
+      }
+    }
+
+    function logout(){ localStorage.removeItem('bengkel_logged'); alert('Logged out'); location.hash='home'; }
+
+    /* ---------------------- Members DB (localStorage) ---------------------- */
+    function getMembers(){ return JSON.parse(localStorage.getItem('bengkel_members')||'[]'); }
+    function setMembers(list){ localStorage.setItem('bengkel_members', JSON.stringify(list)); }
+
+    function addMemberFromPublic(){
+      const nama = document.getElementById('m_nama').value.trim();
+      const phone = document.getElementById('m_phone').value.trim();
+      const plate = document.getElementById('m_plate').value.trim();
+      const publicMsg = document.getElementById('publicMsg');
+      publicMsg.textContent = ''; // Clear previous message
+
+      if(!nama||!phone){ 
+        publicMsg.textContent='Nama dan No HP wajib.'; 
+        publicMsg.className = 'msg-error small';
+        return; 
+      }
+      
+      const members = getMembers();
+      members.push({id:Date.now(), nama, phone, plate, joined:new Date().toISOString()});
+      setMembers(members);
+
+      publicMsg.textContent='Terima kasih, pendaftaran berhasil.';
+      publicMsg.className = 'msg-success small';
+
+      // Clear form
+      document.getElementById('m_nama').value=''; 
+      document.getElementById('m_phone').value=''; 
+      document.getElementById('m_plate').value='';
+      
+      renderPublicList();
+    }
+
+    function adminAddMember(){
+      const nama = document.getElementById('a_nama').value.trim();
+      const phone = document.getElementById('a_phone').value.trim();
+      const plate = document.getElementById('a_plate').value.trim();
+      const msgEl = document.getElementById('adminMemberMsg');
+      msgEl.textContent = ''; // Clear previous message
+
+      if(!nama||!phone){ 
+        msgEl.textContent='Nama dan HP wajib.'; 
+        msgEl.className = 'msg-error small';
+        return; 
+      }
+      
+      const members = getMembers();
+      members.unshift({id:Date.now(), nama, phone, plate, joined:new Date().toISOString()});
+      setMembers(members);
+      
+      // Clear form
+      document.getElementById('a_nama').value=''; 
+      document.getElementById('a_phone').value=''; 
+      document.getElementById('a_plate').value='';
+      
+      // Success message and stats update
+      msgEl.textContent = `Member ${nama} berhasil ditambahkan!`;
+      msgEl.className = 'msg-success small';
+      setTimeout(() => msgEl.textContent = '', 3000);
+
+      renderMemberList(); 
+      refreshStats();
+    }
+
+    function renderMemberList(){
+      const container = document.getElementById('memberList');
+      const q = (document.getElementById('searchMember')?.value||'').toLowerCase();
+      // Member baru di atas (unshift)
+      const members = getMembers().filter(m=> (m.nama||'').toLowerCase().includes(q) || (m.phone||'').toLowerCase().includes(q));
+      container.innerHTML='';
+      if(members.length===0){ container.innerHTML='<div class="muted">Belum ada member.</div>'; return; }
+      members.forEach(m=>{
+        const row = document.createElement('div'); row.className='member-row';
+        const date = new Date(m.joined);
+        const joinedDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+        const left = document.createElement('div'); left.innerHTML=`<strong>${escapeHtml(m.nama)}</strong><div class="muted small">${m.phone} • ${m.plate||'N/A'} • Bergabung: ${joinedDate}</div>`;
+        const right = document.createElement('div'); right.className='actions';
+        const btnEdit = document.createElement('button'); btnEdit.textContent='Edit'; btnEdit.onclick=()=>editMember(m.id);
+        const btnDel = document.createElement('button'); btnDel.textContent='Hapus'; btnDel.style.background='#c33'; btnDel.onclick=()=>{ if(confirm('Hapus member?')){ deleteMember(m.id); } };
+        right.appendChild(btnEdit); right.appendChild(btnDel);
+        row.appendChild(left); row.appendChild(right);
+        container.appendChild(row);
+      });
+    }
+
+    function editMember(id){
+      const members = getMembers(); const m = members.find(x=>x.id===id); if(!m) return alert('Member tidak ditemukan');
+      const nama = prompt('Edit Nama', m.nama); if(nama===null) return;
+      const phone = prompt('Edit No HP', m.phone); if(phone===null) return;
+      const plate = prompt('Edit Plat', m.plate||''); if(plate===null) return;
+      
+      if(!nama || !phone) { alert('Nama dan No HP tidak boleh kosong!'); return; }
+      
+      m.nama=nama; m.phone=phone; m.plate=plate; 
+      setMembers(members); 
+      renderMemberList(); 
+      refreshStats();
+    }
+
+    function deleteMember(id){ const members = getMembers().filter(m=>m.id!==id); setMembers(members); renderMemberList(); refreshStats(); }
+    function clearAllMembers(){ 
+      if(!confirm('Yakin hapus SEMUA member? Aksi ini tidak bisa dibatalkan!')) return; 
+      setMembers([]); 
+      renderMemberList(); 
+      refreshStats(); 
+    }
+
+    function exportCSV(){ const members = getMembers(); if(members.length===0){ alert('Tidak ada data untuk diexport.'); return; }
+      const rows = [['id','nama','phone','plate','joined'],...members.map(m=>[m.id,m.nama,m.phone,m.plate,m.joined])];
+      const csv = rows.map(r=>r.map(cell=>`"${String(cell).replace(/"/g,'""') }"`).join(',')).join('\n');
+      const blob = new Blob([csv],{type:'text/csv'}); 
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='bengkel_members_export.csv'; a.click(); 
+      URL.revokeObjectURL(url);
+    }
+
+    function refreshStats(){ document.getElementById('statTotal').textContent = getMembers().length; }
+
+    function renderPublicList(){ 
+      const el = document.getElementById('publicList'); 
+      if(!el) return; // Exit if element doesn't exist (e.g. on Dashboard view)
+
+      // Hanya tampilkan 6 member terbaru
+      const m = getMembers().slice(0,6); 
+      
+      if(m.length===0){ el.innerHTML='<div class="muted">Belum ada member terdaftar.</div>'; return; }
+      el.innerHTML = m.map(x=>`<div style="padding:6px 0;border-bottom:1px dashed #f5f5f5"><strong>${escapeHtml(x.nama)}</strong><div class=\"muted small\">${escapeHtml(x.phone)} • Plat: ${escapeHtml(x.plate||'N/A')}</div></div>`).join('');
+    }
+
+    /* ---------------------- Utilities ---------------------- */
+    function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    /* ---------------------- Contact ---------------------- */
+    function sendContact(){ 
+      const n=document.getElementById('c_name').value.trim(); 
+      const msg=document.getElementById('c_message').value.trim(); 
+      const contactMsg = document.getElementById('contactMsg');
+
+      if(!n||!msg){ 
+        contactMsg.textContent='Nama dan Pesan wajib diisi.'; 
+        contactMsg.className = 'msg-error small';
+        return; 
+      } 
+      
+      contactMsg.textContent='Pesan terkirim. Terima kasih!'; 
+      contactMsg.className = 'msg-success small';
+      
+      // Clear form
+      document.getElementById('c_name').value=''; 
+      document.getElementById('c_message').value=''; 
+    }
+
+    /* ---------------------- init ---------------------- */
+    // Ensure default admin saved
+    if(!localStorage.getItem('bengkel_admins')) localStorage.setItem('bengkel_admins', JSON.stringify([DEFAULT_ADMIN]));
+
+    // protect direct dashboard access on load (dijalankan di handleHash)
+  </script>
+</body>
+</html>
